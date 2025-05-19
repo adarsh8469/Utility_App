@@ -6,7 +6,7 @@ function BusinessList({ businessList, title }) {
     return (
         <div className='mt-12 mb-12 px-4'>
             <h2 className='font-bold text-2xl sm:text-[32px]'>{title}</h2>
-            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-5'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5'>
                 {businessList.length > 0 ? businessList.map((business, index) => (
                     <div key={index} className='shadow-md rounded-lg cursor-pointer hover:shadow-lg hover:shadow-red-200 hover:scale-102 transition-all ease-in-out'>
                         <Image
