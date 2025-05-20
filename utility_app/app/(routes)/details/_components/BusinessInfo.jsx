@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Clock, Mail, MapPin, Share, User } from 'lucide-react'
+import { Clock, Mail, MapPin, NotebookPen, Share, User } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -13,7 +13,7 @@ function BusinessInfo({ business }) {
         height={190}
         className='rounded-full h-[190px] w-[190px] object-cover'
       />
-      
+
       <div className='flex flex-col sm:flex-row w-full gap-5 sm:justify-between items-center sm:items-start'>
         {/* Left Info Section */}
         <div className='flex flex-col items-center sm:items-start gap-2 mt-2 text-center sm:text-left'>
@@ -38,6 +38,13 @@ function BusinessInfo({ business }) {
           <h2 className='flex items-center gap-2 text-base sm:text-lg text-gray-500'>
             <Clock /> Available 08:00 AM to 09:00 PM
           </h2>
+          <Button
+            className='bg-red-500 hover:bg-red-600 active:scale-95 active:bg-red-700 transition duration-150 ease-in-out flex items-center gap-2 w-full text-white 
+    text-base sm:text-lg rounded-full h-11'>
+            <NotebookPen className='w-5 h-5' />
+            Book Appointment
+          </Button>
+
         </div>
       </div>
     </div>
