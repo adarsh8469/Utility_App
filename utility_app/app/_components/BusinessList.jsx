@@ -9,8 +9,7 @@ function BusinessList({ businessList, title }) {
             <h2 className='font-bold text-2xl sm:text-[32px]'>{title}</h2>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-5'>
                 {businessList.length > 0 ? businessList.map((business, index) => (
-                    <Link href = {'/details/' +business.id}
-                    key={index} className='shadow-md rounded-lg cursor-pointer hover:shadow-lg hover:shadow-red-200 hover:scale-102 transition-all ease-in-out'>
+                    <div key={index} className='shadow-md rounded-lg cursor-pointer hover:shadow-lg hover:shadow-red-200 hover:scale-102 transition-all ease-in-out'>
                         <Image
                             src={business.images[0]?.url}
                             alt='business img'
@@ -32,16 +31,16 @@ function BusinessList({ businessList, title }) {
                                     <h2 className='text-gray-500 text-xs'>{business.email}</h2>
                                 </div>
                                 <div className='flex flex-col gap-2 w-full sm:w-auto'>
-                                    <Button className='!bg-[#e42b50f1] hover:!bg-[#e42b50f1] text-sm h-9 px-4 rounded-full w-full sm:w-auto'>
+                                    <Link href = {'/details/' +business.id}><Button className='!bg-[#e42b50f1] hover:!bg-[#e42b50f1] text-sm h-9 px-4 rounded-full w-full sm:w-auto'>
                                         Book Now
-                                    </Button>
+                                    </Button></Link>
                                     <Button className='!bg-[#555253ab] hover:!bg-[#575455b4] text-sm h-9 px-4 rounded-full w-full sm:w-auto'>
                                         Schedule
                                     </Button>
                                 </div>
                             </div>
                         </div>
-                    </Link>
+                    </div>
                 )) : (
                     [1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
                         <div

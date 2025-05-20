@@ -19,7 +19,7 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
 
     useEffect(() => {
-        console.log(data);
+        
     }, [data]);
 
     return (
