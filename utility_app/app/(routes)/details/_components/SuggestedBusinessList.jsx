@@ -35,7 +35,7 @@ function SuggestedBusinessList({ business }) {
 
   return (
     <div className='pl-0 md:pl-5'>
-      <BookingSection>
+      <BookingSection business = {business}>
         <Button
         className='bg-red-500 hover:bg-red-600 active:scale-95 active:bg-red-700 transition duration-150 ease-in-out flex items-center gap-2 w-full 
                 text-white text-base sm:text-lg rounded-full h-11 mb-5'>
