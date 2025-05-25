@@ -3,7 +3,32 @@ import { Clock, Mail, MapPin, NotebookPen, Share, User } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
-function BusinessInfo({ business }) {
+function BusinessInfo({ business, loading }) {
+  if (loading) {
+    return (
+      <div className='flex flex-col md:flex-row gap-5 items-center md:items-start animate-pulse'>
+        <div className='h-[190px] w-[190px] bg-gray-300 rounded-full'></div>
+
+        <div className='flex flex-col sm:flex-row w-full gap-5 sm:justify-between items-center sm:items-start'>
+          {/* Left Skeleton */}
+          <div className='flex flex-col items-center sm:items-start gap-3 mt-2 w-full sm:w-1/2'>
+            <div className='h-5 w-24 bg-gray-300 rounded-full' />
+            <div className='h-6 w-40 bg-gray-300 rounded' />
+            <div className='h-4 w-56 bg-gray-300 rounded' />
+            <div className='h-4 w-48 bg-gray-300 rounded' />
+          </div>
+
+          {/* Right Skeleton */}
+          <div className='flex flex-col items-center sm:items-end gap-4 w-full sm:w-1/2'>
+            <div className='h-10 w-10 bg-gray-300 rounded' />
+            <div className='h-4 w-40 bg-gray-300 rounded' />
+            <div className='h-4 w-48 bg-gray-300 rounded' />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return business?.name && (
     <div className='flex flex-col md:flex-row gap-5 items-center md:items-start'>
       <Image
@@ -38,17 +63,10 @@ function BusinessInfo({ business }) {
           <h2 className='flex items-center gap-2 text-base sm:text-lg text-gray-500'>
             <Clock /> Available 08:00 AM to 09:00 PM
           </h2>
-          <Button
-            className='bg-red-500 hover:bg-red-600 active:scale-95 active:bg-red-700 transition duration-150 ease-in-out flex items-center gap-2 w-full text-white 
-    text-base sm:text-lg rounded-full h-11'>
-            <NotebookPen className='w-5 h-5' />
-            Book Appointment
-          </Button>
-
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default BusinessInfo
+export default BusinessInfo;
