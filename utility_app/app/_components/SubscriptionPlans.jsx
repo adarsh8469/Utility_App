@@ -1,6 +1,8 @@
 'use client'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import Script from 'next/script'
 import { Plus } from 'lucide-react'
+
 
 const plans = [
   {

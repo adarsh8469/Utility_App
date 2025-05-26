@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -11,7 +11,7 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
 import { Menu, X } from 'lucide-react';
 
 function Header() {
@@ -41,17 +41,15 @@ function Header() {
                         <h2 className="hover:scale-105 font-semibold transition duration-200">Services</h2>
                         <h2 className="hover:scale-105 font-semibold transition duration-200">Explore</h2>
                         <Link href="/SubscriptionPlans"><h2 className="hover:scale-105 text-[#e42b50f1] font-semibold transition duration-200">Subscription</h2></Link>
-                        <h2 className="hover:scale-105 font-semibold transition duration-200">About us</h2>
+                        <h2 className="hover:scale-105 font-semibold transition duration-200"><Link href="/AboutUs">About us</Link></h2>
                     </div>
                 </div>
 
-                {/* Right: Auth Section */}
+                {/* Right: Mobile Toggle & Avatar */}
                 <div className="md:hidden flex items-center gap-3">
-                    {!data?.user && (
-                        <Button variant="ghost" onClick={() => setMenuOpen(!menuOpen)}>
-                            {menuOpen ? <X size={24} /> : <Menu size={24} />}
-                        </Button>
-                    )}
+                    <Button variant="ghost" onClick={() => setMenuOpen(!menuOpen)}>
+                        {menuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </Button>
 
                     {data?.user && (
                         <DropdownMenu>
@@ -67,7 +65,7 @@ function Header() {
                             <DropdownMenuContent className="mt-2">
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem><Link href={'/mybooking'}>My Booking</Link></DropdownMenuItem>
+                                <DropdownMenuItem><Link href="/mybooking">My Booking</Link></DropdownMenuItem>
                                 <DropdownMenuItem className="text-red-600"><Link href="/SubscriptionPlans">Subscription Plan</Link></DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
                             </DropdownMenuContent>
@@ -91,7 +89,7 @@ function Header() {
                             <DropdownMenuContent>
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem><Link href={'/mybooking'}>My Booking</Link></DropdownMenuItem>
+                                <DropdownMenuItem><Link href="/mybooking">My Booking</Link></DropdownMenuItem>
                                 <DropdownMenuItem className="text-red-600"><Link href="/SubscriptionPlans">Subscription Plan</Link></DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
                             </DropdownMenuContent>
@@ -108,33 +106,45 @@ function Header() {
             </div>
 
             {/* Mobile Nav Menu */}
-            {menuOpen && !data?.user && (
+            {menuOpen && (
                 <div className="md:hidden mt-4 flex flex-col gap-4 text-center text-[17px]">
                     <Link href="/" onClick={() => setMenuOpen(false)}>
                         <h2 className="hover:scale-105 font-semibold transition duration-200">Home</h2>
                     </Link>
-                    <Link href="/services" onClick={() => setMenuOpen(false)}>
+                    <Link href="/" onClick={() => setMenuOpen(false)}>
                         <h2 className="hover:scale-105 font-semibold transition duration-200">Services</h2>
                     </Link>
-                    <Link href="/explore" onClick={() => setMenuOpen(false)}>
+                    <Link href="/" onClick={() => setMenuOpen(false)}>
                         <h2 className="hover:scale-105 font-semibold transition duration-200">Explore</h2>
                     </Link>
                     <Link href="/SubscriptionPlans" onClick={() => setMenuOpen(false)}>
                         <h2 className="hover:scale-105 text-[#e42b50f1] font-semibold transition duration-200">Subscription</h2>
                     </Link>
-                    <Link href="/about" onClick={() => setMenuOpen(false)}>
+                    <Link href="/AboutUs" onClick={() => setMenuOpen(false)}>
                         <h2 className="hover:scale-105 font-semibold transition duration-200">About us</h2>
                     </Link>
 
-                    <Button
-                        onClick={() => {
-                            signIn('descope')
-                            setMenuOpen(false)
-                        }}
-                        className="!bg-[#e42b50f1] hover:!bg-[#e42b50f1] font-semibold text-white px-4 py-2 rounded"
-                    >
-                        Login / Sign up
-                    </Button>
+                    {!data?.user ? (
+                        <Button
+                            onClick={() => {
+                                signIn('descope');
+                                setMenuOpen(false);
+                            }}
+                            className="!bg-[#e42b50f1] hover:!bg-[#e42b50f1] font-semibold text-white px-4 py-2 rounded"
+                        >
+                            Login / Sign up
+                        </Button>
+                    ) : (
+                        <Button
+                            onClick={() => {
+                                signOut();
+                                setMenuOpen(false);
+                            }}
+                            className="bg-red-600 hover:bg-red-700 font-semibold text-white px-4 py-2 rounded"
+                        >
+                            Log out
+                        </Button>
+                    )}
                 </div>
             )}
         </div>

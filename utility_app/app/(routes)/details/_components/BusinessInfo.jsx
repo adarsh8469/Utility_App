@@ -61,7 +61,7 @@ function BusinessInfo({ business, loading }) {
             <User /> {business.contactPerson}
           </h2>
           <h2 className='flex items-center gap-2 text-base sm:text-lg text-gray-500'>
-            <Clock /> Available 08:00 AM to 09:00 PM
+            <Clock /> Available 10:00 AM to 07:00 PM
           </h2>
         </div>
       </div>
