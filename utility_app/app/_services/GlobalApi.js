@@ -108,10 +108,45 @@ const CreateNewBooking = async (businessId, date, time, userEmail, userName) => 
         return result;
 }
 
+const BusinessBookedSlot = async (businessId, date) => {
+    const query = gql`
+    query BusinessBookedSlot {
+        bookings(where: {businessList: {id: "`+businessId+`"}, date: "`+date+`"}) {
+  	        date
+            time
+        }
+    }`
+    const result = await request(MASTER_URL, query)
+    return result;
+}
+
+const GetUserBookingHistory = async (userEmail) => {
+    const query = gql`
+        query GetUserBookingHistory {
+            bookings(where: {userEmail: "`+userEmail+`"}
+                orderBy: publishedAt_DESC) {
+                businessList {
+                    name
+                    images {
+                        url
+                    }
+                    contactPerson
+                    address
+                }
+                date
+                time
+            }
+        }`
+        const result = await request(MASTER_URL, query)
+        return result;
+}
+
 export default{
     getCategory,
     getAllBusinessList,
     getBusinessByCategory,
     getBusinessById,
-    CreateNewBooking
+    CreateNewBooking,
+    BusinessBookedSlot,
+    GetUserBookingHistory
 }

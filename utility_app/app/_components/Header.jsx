@@ -67,7 +67,7 @@ function Header() {
                             <DropdownMenuContent className="mt-2">
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>My Booking</DropdownMenuItem>
+                                <DropdownMenuItem><Link href={'/mybooking'}>My Booking</Link></DropdownMenuItem>
                                 <DropdownMenuItem className="text-red-600"><Link href="/SubscriptionPlans">Subscription Plan</Link></DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
                             </DropdownMenuContent>
@@ -91,7 +91,7 @@ function Header() {
                             <DropdownMenuContent>
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>My Booking</DropdownMenuItem>
+                                <DropdownMenuItem><Link href={'/mybooking'}>My Booking</Link></DropdownMenuItem>
                                 <DropdownMenuItem className="text-red-600"><Link href="/SubscriptionPlans">Subscription Plan</Link></DropdownMenuItem>
                                 <DropdownMenuItem onClick={() => signOut()}>Log out</DropdownMenuItem>
                             </DropdownMenuContent>

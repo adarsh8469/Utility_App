@@ -14,16 +14,30 @@ import { Button } from '@/components/ui/button';
 import GlobalApi from '@/app/_services/GlobalApi';
 import { useSession } from 'next-auth/react';
 import { toast } from 'sonner';
+import moment from 'moment/moment';
 
 function BookingSection({ children, business }) {
     const [date, setDate] = useState(new Date());
     const [timeSlot, setTimeSlot] = useState([]);
     const [selectedTime, setSelectedTime] = useState();
+    const [BookedSlot, setBookedSlot] = useState([]);
     const {data} = useSession();
 
     useEffect(() => {
         getTime()
     }, []);
+
+    useEffect(() => {
+        date && BusinessBookedSlot();
+    }, [date])
+
+    const BusinessBookedSlot = () => {
+        GlobalApi.BusinessBookedSlot(business?.id, moment(date).format('DD-MMM-yyyy')).then(resp => {
+            console.log(resp);
+            setBookedSlot(resp.bookings)
+        })
+    }
+
     const getTime = () => {
         const timeList = [];
         for (let i = 10; i <= 12; i++) {
@@ -45,7 +59,7 @@ function BookingSection({ children, business }) {
         setTimeSlot(timeList)
       }
       const saveBooking = () => {
-        GlobalApi.CreateNewBooking(business.id, date, selectedTime, data.user.email, data.user.email).then(resp => {
+        GlobalApi.CreateNewBooking(business.id, moment(date).format('DD-MMM-yyyy'), selectedTime, data.user.email, data.user.email).then(resp => {
             console.log(resp);
             if(resp){
                 // Done
@@ -57,6 +71,10 @@ function BookingSection({ children, business }) {
             // Error
             toast('Something went wrong!!')
         })
+      }
+
+      const isSlotBooked = (time) => {
+        return BookedSlot.find(item => item.time == time)
       }
 
     return (
@@ -86,7 +104,7 @@ function BookingSection({ children, business }) {
                             <h2 className='my-5 font-bold'>Select Time Slot</h2>
                             <div className='grid grid-cols-3 gap-3'>
                                 {timeSlot.map((item, index) => (
-                                    <Button key={index} variant='outline' 
+                                    <Button key={index} variant='outline' disabled = {isSlotBooked(item.time)}
                                     className={`border rounded-full p-2 px-3 hover:text-white 
                                     hover:bg-red-500 ${selectedTime == item.time && 'bg-red-500 text-white'}`} onClick={() => setSelectedTime(item.time)}>
                                         {item.time}</Button>
@@ -97,7 +115,7 @@ function BookingSection({ children, business }) {
                     <SheetFooter className="mt-1">
                     <SheetClose asChild>
                         <div className='flex gap-5'>
-                            <Button type="submit" 
+                            <Button 
                             className='bg-green-500 hover:bg-green-500 hover:font-bold' 
                             disabled = {!(selectedTime && date)} onClick = {() => saveBooking()}>Book Slot</Button>
                             <Button variant='destructive' type="submit" className='hover:font-bold'>Cancel</Button>
